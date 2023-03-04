@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\DeskStoreRequest;
-use App\Http\Resources\DeskResource;
-use App\Models\Desk;
+use App\Http\Requests\CardStoreRequest;
+use App\Http\Resources\CardResource;
+use App\Models\Card;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
-class DeskController extends Controller
+class CardController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,54 +19,53 @@ class DeskController extends Controller
      */
     public function index()
     {
-        //
-        return DeskResource::collection(Desk::all());
+        return CardResource::collection(Card::all());
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
-    public function store(DeskStoreRequest $request)
+    public function store(CardStoreRequest $request)
     {
-        return  Desk::create($request->validated());
+        return Card::create($request->validated());
     }
 
     /**
      * Display the specified resource.
      *
-     * @param Desk $desk
-     * @return DeskResource
+     * @param Card $card
+     * @return CardResource
      */
-    public function show(Desk $desk)
+    public function show(Card $card)
     {
-        return new DeskResource($desk);
+        return new CardResource($card);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param DeskStoreRequest $request
-     * @param Desk $desk
-     * @return DeskResource
+     * @param CardStoreRequest $request
+     * @param Card $card
+     * @return Card
      */
-    public function update(DeskStoreRequest $request, Desk $desk): DeskResource
+    public function update(CardStoreRequest $request, Card $card)
     {
-        $desk->update($request->validated());
-        return new DeskResource($desk);
+        $card->update($request->validated());
+        return $card;
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param Desk $desk
+     * @param Card $card
      * @return Response
      */
-    public function destroy(Desk $desk)
+    public function destroy(Card $card)
     {
-        $desk->delete();
+        $card->delete();
         return response(null, ResponseAlias::HTTP_NO_CONTENT);
     }
 }

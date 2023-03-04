@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class DeskList extends Model
 {
     use HasFactory;
+    protected $fillable = ['name', 'desk_id'];
+
 
     public function cards()
     {
